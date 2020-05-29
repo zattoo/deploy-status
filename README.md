@@ -50,18 +50,10 @@ jobs:
     name: deploy
     steps:
       - uses: actions/checkout@v2
-      - name: init
-        uses: zattoo/deploy-action@releases/v1
-        id: deploy
-        with:
-          token: ${{ github.token }}
-          environment: live
-          environment_url: https://example.com
-          state: in_progress
       - run: # your delivery scripts
       - name: update success status
         if: success()
-        uses: zattoo/deploy-action@releases/v1
+        uses: zattoo/deploy-action@v1
         with:
           token: ${{ github.token }}
           environment: live
@@ -69,11 +61,10 @@ jobs:
           state: success
       - name: update failure status
         if: failure()
-        uses: zattoo/deploy-action@releases/v1
+        uses: zattoo/deploy-action@v1
         with:
           token: ${{ github.token }}
           environment: live
-          environment_url: https://example.com
           state: failure
 
 ````

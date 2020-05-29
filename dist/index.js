@@ -678,8 +678,6 @@ async function run() {
             log_url: `https://github.com/${repo.owner}/${repo.repo}/commit/${context.sha}/checks`,
             state,
         });
-
-        core.setOutput('id', deploy.data.id);
     } catch (error) {
         core.setFailed(error.message);
     }
