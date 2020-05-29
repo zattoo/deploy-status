@@ -27,7 +27,7 @@ async function run() {
 
         await octokit.repos.createDeploymentStatus({
             ...repo,
-            deployment_id: deploy.data.id || 0,
+            deployment_id: deploy.data.id,
             description,
             environment_url,
             log_url: `https://github.com/${repo.owner}/${repo.repo}/commit/${context.sha}/checks`,

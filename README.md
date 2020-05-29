@@ -56,7 +56,7 @@ jobs:
         with:
           token: ${{ github.token }}
           environment: live
-          environment_url: https://web.zattoo.com
+          environment_url: https://example.com
           state: in_progress
       - run: # your delivery scripts
       - name: update success status
@@ -65,16 +65,15 @@ jobs:
         with:
           token: ${{ github.token }}
           environment: live
-          environment_url: https://web.zattoo.com
+          environment_url: https://example.com
           state: success
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
       - name: update failure status
         if: failure()
         uses: zattoo/deploy-action@releases/v1
         with:
           token: ${{ github.token }}
           environment: live
-          environment_url: https://web.zattoo.com
+          environment_url: https://example.com
           state: failure
 
 ````
