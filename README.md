@@ -1,114 +1,81 @@
+# Deploy Action
 
-<p align="center">
-  <a href="https://github.com/actions/javascript-action/actions"><img alt="javscript-action status" src="https://github.com/actions/javascript-action/workflows/units-test/badge.svg"></a>
-</p>
+GitHub Action to create GitHub Deployment, see https://developer.github.com/v3/repos/deployments
 
-# Create a JavaScript Action
+## Inputs
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
+### `token`
 
-This template includes tests, linting, a validation workflow, publishing, and versioning guidance.  
+`string`
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+Required. GitHub token
 
-## Create an action from this template
+### [`state`](https://developer.github.com/v3/repos/deployments/#list-deployment-statuses)
 
-Click the `Use this Template` and provide the new repo details for your action
+`"queued" | "pending" | "in_progress" | "error" | "failure" | "success"`
 
-## Code in Master
+Required. Status of deploy
 
-Install the dependencies  
-```bash
-$ npm install
-```
+### `description`
 
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
+`string`
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
+A short description of the status. The maximum description length is 140 characters
 
-...
-```
+### `environment`
 
-## Change action.yml
+`string`, default: `live`
 
-The action.yml contains defines the inputs and output for your action.
+Name for the target deployment environment. For example, "production", "release", or "qa"'
 
-Update the action.yml with your name, description, inputs and outputs for your action.
 
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
+### `environment_url`
 
-## Change the Code
+`string`
 
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
+Sets the URL for accessing your environment
 
-```javascript
-const core = require('@actions/core');
-...
+## Output
 
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
+`id: string`
 
-run()
-```
+## Example
 
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
+````yaml
+name: Delivery
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: init
+        uses: zattoo/deploy-action@releases/v1
+        with:
+          token: ${{ github.token }}
+          environment: live
+          environment_url: https://web.zattoo.com
+          state: 'in_progress'
+      - run: # your delivery scripts
+      - name: update success status
+        if: success()
+        uses: zattoo/deploy-action@releases/v1
+        with:
+          token: ${{ github.token }}
+          environment: live
+          environment_url: https://web.zattoo.com
+          state: 'success'
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      - name: update failure status
+        if: failure()
+        uses: zattoo/deploy-action@releases/v1
+        with:
+          token: ${{ github.token }}
+          environment: live
+          environment_url: https://web.zattoo.com
+          state: 'failure'
 
-## Package for distribution
-
-GitHub Actions will run the entry point from the action.yml. Packaging assembles the code into one file that can be checked in to Git, enabling fast and reliable execution and preventing the need to check in node_modules.
-
-Actions are run from GitHub repos.  Packaging the action will create a packaged action in the dist folder.
-
-Run package
-
-```bash
-npm run package
-```
-
-Since the packaged index.js is run from the dist folder.
-
-```bash
-git add dist
-```
-
-## Create a release branch
-
-Users shouldn't consume the action from master since that would be latest code and actions can break compatibility between major versions.
-
-Checkin to the v1 release branch
-
-```bash
-$ git checkout -b v1
-$ git commit -a -m "v1 release"
-```
-
-```bash
-$ git push origin v1
-```
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Usage
-
-You can now consume the action by referencing the v1 branch
-
-```yaml
-uses: actions/javascript-action@v1
-with:
-  milliseconds: 1000
-```
-
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
+````

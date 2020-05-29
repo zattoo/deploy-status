@@ -1,13 +1,29 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Deploy Action'
+description: 'GitHub Action to create Deployment'
+author: 'godban'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  token:
+    description: 'GitHub token'
     required: true
-    default: '1000'
+  state:
+    description: 'Status of deploy. Can be "queued", "pending", "in_progress", "error", "failure", or "success"'
+    required: true
+  description:
+    description: 'A short description of the status. The maximum description length is 140 characters'
+    required: false
+  environment:
+    description: 'Name for the target deployment environment. For example, "production", "release", or "qa"'
+    default: 'live'
+    required: false
+  environment_url:
+    description: 'Sets the URL for accessing your environment'
+    required: false
 outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+  deployment_id:
+    description: 'Unique identifier of created deploy'
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'index.js'
+branding:
+  icon: upload
+  color: blue
