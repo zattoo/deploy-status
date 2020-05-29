@@ -2,6 +2,8 @@
 
 GitHub Action to create GitHub Deployment, see https://developer.github.com/v3/repos/deployments
 
+![environment](https://i.imgur.com/MTZ7noe.png)
+
 ## Inputs
 
 ### `token`
@@ -39,7 +41,7 @@ Sets the URL for accessing your environment
 
 `id: string`
 
-## Example
+## Usage Example
 
 ````yaml
 name: Delivery
@@ -54,11 +56,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: init
         uses: zattoo/deploy-action@releases/v1
+        id: deploy
         with:
           token: ${{ github.token }}
           environment: live
           environment_url: https://web.zattoo.com
-          state: 'in_progress'
+          state: in_progress
       - run: # your delivery scripts
       - name: update success status
         if: success()
@@ -67,7 +70,7 @@ jobs:
           token: ${{ github.token }}
           environment: live
           environment_url: https://web.zattoo.com
-          state: 'success'
+          state: success
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
       - name: update failure status
         if: failure()
@@ -76,6 +79,6 @@ jobs:
           token: ${{ github.token }}
           environment: live
           environment_url: https://web.zattoo.com
-          state: 'failure'
+          state: failure
 
 ````

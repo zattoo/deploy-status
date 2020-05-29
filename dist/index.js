@@ -659,24 +659,23 @@ async function run() {
         const environment = core.getInput('environment') || 'live';
         const environment_url = core.getInput('environment_url');
 
-        const octokit = new github.GitHub(token);
+        const octokit = new github.GitHub(token, {previews: ['flash', 'ant-man']});
 
         const deploy = await octokit.repos.createDeployment({
             description,
             environment,
             owner: repo.owner,
-            repo: repo.repo,
             ref: context.ref,
+            repo: repo.repo,
+            required_contexts: [],
         });
 
         await octokit.repos.createDeploymentStatus({
+            ...repo,
             deployment_id: deploy.data.id,
             description,
-            environment,
             environment_url,
             log_url: `https://github.com/${repo.owner}/${repo.repo}/commit/${context.sha}/checks`,
-            owner: repo.owner,
-            repo: repo.repo,
             state,
         });
 
