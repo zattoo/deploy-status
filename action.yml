@@ -18,9 +18,6 @@ inputs:
   environment_url:
     description: 'Sets the URL for accessing your environment'
     required: false
-outputs:
-  deployment_id:
-    description: 'Unique identifier of created deploy'
 runs:
   using: 'node12'
   main: 'dist/index.js'

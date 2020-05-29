@@ -37,10 +37,6 @@ Name for the target deployment environment. For example, "production", "release"
 
 Sets the URL for accessing your environment
 
-## Output
-
-`id: string`
-
 ## Usage Example
 
 ````yaml

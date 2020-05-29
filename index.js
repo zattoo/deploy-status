@@ -27,14 +27,12 @@ async function run() {
 
         await octokit.repos.createDeploymentStatus({
             ...repo,
-            deployment_id: deploy.data.id,
+            deployment_id: deploy.data.id || 0,
             description,
             environment_url,
             log_url: `https://github.com/${repo.owner}/${repo.repo}/commit/${context.sha}/checks`,
             state,
         });
-
-        core.setOutput('id', deploy.data.id);
     } catch (error) {
         core.setFailed(error.message);
     }
