@@ -1,34 +1,36 @@
 {
-  "name": "deploy-action",
-  "version": "1.0.0",
-  "description": "GitHub Action to create Deployment",
-  "main": "index.js",
-  "scripts": {
-    "test": "eslint index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zattoo/deploy-action.git"
-  },
-  "keywords": [
-    "GitHub",
-    "Actions",
-    "JavaScript",
-    "Deploy",
-    "Deployment"
-  ],
-  "author": "GitHub",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zattoo/deploy-action/issues"
-  },
-  "homepage": "https://github.com/zattoo/deploy-action#readme",
-  "dependencies": {
-    "@actions/core": "1.2.4",
-    "@actions/github": "2.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "12.12.42",
-    "eslint": "7.1.0"
-  }
+    "name": "deploy-action",
+    "version": "1.0.0",
+    "description": "GitHub Action to create Deployment",
+    "main": "index.js",
+    "scripts": {
+        "test": "eslint index.js",
+        "package": "ncc build index.js -o dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zattoo/deploy-action.git"
+    },
+    "keywords": [
+        "GitHub",
+        "Actions",
+        "JavaScript",
+        "Deploy",
+        "Deployment"
+    ],
+    "author": "GitHub",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/zattoo/deploy-action/issues"
+    },
+    "homepage": "https://github.com/zattoo/deploy-action#readme",
+    "dependencies": {
+        "@actions/core": "1.2.4",
+        "@actions/github": "2.2.0"
+    },
+    "devDependencies": {
+        "@zeit/ncc": "0.22.3",
+        "@types/node": "12.12.42",
+        "eslint": "7.1.0"
+    }
 }

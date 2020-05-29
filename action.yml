@@ -23,7 +23,7 @@ outputs:
     description: 'Unique identifier of created deploy'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
 branding:
   icon: upload
   color: blue
