@@ -1,5 +1,5 @@
-name: 'Deploy Action'
-description: 'GitHub Action to create Deployment'
+name: 'Deploy Status Action'
+description: 'GitHub Action to report deployment status'
 author: 'godban'
 inputs:
   token:

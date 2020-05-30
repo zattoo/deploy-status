@@ -53,7 +53,7 @@ jobs:
       - run: # your delivery scripts
       - name: update success status
         if: success()
-        uses: zattoo/deploy-action@v1
+        uses: zattoo/deploy-status-action@v1
         with:
           token: ${{ github.token }}
           environment: live
@@ -61,7 +61,7 @@ jobs:
           state: success
       - name: update failure status
         if: failure()
-        uses: zattoo/deploy-action@v1
+        uses: zattoo/deploy-status-action@v1
         with:
           token: ${{ github.token }}
           environment: live

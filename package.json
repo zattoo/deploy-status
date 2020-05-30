@@ -1,7 +1,7 @@
 {
-    "name": "deploy-action",
+    "name": "deploy-status-action",
     "version": "1.0.0",
-    "description": "GitHub Action to create Deployment",
+    "description": "GitHub Action to report deployment status",
     "main": "index.js",
     "scripts": {
         "test": "eslint index.js",
@@ -9,7 +9,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/zattoo/deploy-action.git"
+        "url": "git+https://github.com/zattoo/deploy-status-action.git"
     },
     "keywords": [
         "GitHub",
@@ -21,9 +21,9 @@
     "author": "GitHub",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/zattoo/deploy-action/issues"
+        "url": "https://github.com/zattoo/deploy-status-action/issues"
     },
-    "homepage": "https://github.com/zattoo/deploy-action#readme",
+    "homepage": "https://github.com/zattoo/deploy-status-action#readme",
     "dependencies": {
         "@actions/core": "1.2.4",
         "@actions/github": "2.2.0"
