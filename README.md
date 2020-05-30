@@ -1,4 +1,4 @@
-# Deploy Action
+# Deploy Status
 
 GitHub Action to create GitHub Deployment, see https://developer.github.com/v3/repos/deployments
 
@@ -47,21 +47,21 @@ on:
       - master
 jobs:
   deploy:
-    name: deploy
+    name: Deploy
     steps:
       - uses: actions/checkout@v2
       - run: # your delivery scripts
-      - name: update success status
+      - name: Success
         if: success()
-        uses: zattoo/deploy-status-action@v1
+        uses: zattoo/deploy-status@v1
         with:
           token: ${{ github.token }}
           environment: live
           environment_url: https://example.com
           state: success
-      - name: update failure status
+      - name: Failure
         if: failure()
-        uses: zattoo/deploy-status-action@v1
+        uses: zattoo/deploy-status@v1
         with:
           token: ${{ github.token }}
           environment: live

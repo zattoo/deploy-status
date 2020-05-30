@@ -1,4 +1,4 @@
-name: 'Deploy Status Action'
+name: 'Deploy Status'
 description: 'GitHub Action to report deployment status'
 author: 'godban'
 inputs:
