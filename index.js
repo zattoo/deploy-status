@@ -23,6 +23,7 @@ async function run() {
             ref: context.ref,
             repo: repo.repo,
             required_contexts: [],
+            auto_merge: false,
         });
 
         await octokit.repos.createDeploymentStatus({
