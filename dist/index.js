@@ -656,20 +656,25 @@ async function run() {
         const state = core.getInput('state', {required: true});
         const token = core.getInput('token', {required: true});
         const description = core.getInput('description');
-        const environment = core.getInput('environment') || 'live';
+        const environment = core.getInput('environment');
         const environment_url = core.getInput('environment_url');
 
         const octokit = new github.GitHub(token, {previews: ['flash', 'ant-man']});
 
-        const deploy = await octokit.repos.createDeployment({
+        const params = {
             description,
-            environment,
             owner: repo.owner,
             ref: context.ref,
             repo: repo.repo,
             required_contexts: [],
             auto_merge: false,
-        });
+        };
+
+        if (environment) {
+            params.environment = environment;
+        }
+
+        const deploy = await octokit.repos.createDeployment(params);
 
         await octokit.repos.createDeploymentStatus({
             ...repo,
