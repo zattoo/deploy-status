@@ -4,7 +4,7 @@
     "description": "GitHub Action to report deployment status",
     "main": "index.js",
     "scripts": {
-        "test": "eslint index.js",
+        "test": "eslint index.js && tsc",
         "package": "ncc build index.js -o dist"
     },
     "repository": {
@@ -31,6 +31,7 @@
     "devDependencies": {
         "@types/node": "20.11.17",
         "@vercel/ncc": "0.38.1",
-        "eslint": "8.56.0"
+        "eslint": "8.56.0",
+        "typescript": "5.3.3"
     }
 }
