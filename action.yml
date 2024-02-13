@@ -19,7 +19,7 @@ inputs:
     description: 'Sets the URL for accessing your environment'
     required: false
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'dist/index.js'
 branding:
   icon: upload
