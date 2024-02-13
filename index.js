@@ -27,7 +27,7 @@ async function run() {
 
         await octokit.rest.repos.createDeploymentStatus({
             ...repo,
-            // @ts-ignore the value is not inferred correctly
+            // @ts-ignore The id could be undefined if the deployment was not created
             deployment_id: deploy.data.id,
             description,
             environment_url,
