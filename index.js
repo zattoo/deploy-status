@@ -7,16 +7,15 @@ async function run() {
         const {context} = github;
         const {repo} = context;
 
-        /** @type {state} */
-        const state = core.getInput('state', {required: true});
+        const state = /** @type {state} */(core.getInput('state', {required: true}));
         const token = core.getInput('token', {required: true});
         const description = core.getInput('description');
         const environment = core.getInput('environment') || 'live';
         const environment_url = core.getInput('environment_url');
 
-        const octokit = new github.GitHub(token, {previews: ['flash', 'ant-man']});
+        const octokit = github.getOctokit(token, {previews: ['flash', 'ant-man']});
 
-        const deploy = await octokit.repos.createDeployment({
+        const deploy = await octokit.rest.repos.createDeployment({
             description,
             environment,
             owner: repo.owner,
@@ -26,8 +25,9 @@ async function run() {
             auto_merge: false,
         });
 
-        await octokit.repos.createDeploymentStatus({
+        await octokit.rest.repos.createDeploymentStatus({
             ...repo,
+            // @ts-ignore The id could be undefined if the deployment was not created
             deployment_id: deploy.data.id,
             description,
             environment_url,
@@ -35,7 +35,7 @@ async function run() {
             state,
         });
     } catch (error) {
-        core.setFailed(error.message);
+        core.setFailed(error instanceof Error ? error.message : 'Unknown error');
     }
 }
 

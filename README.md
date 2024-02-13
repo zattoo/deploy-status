@@ -49,7 +49,7 @@ jobs:
   deploy:
     name: Deploy
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: # your delivery scripts
       - name: Success
         if: success()
