@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 - Updated dependencies
-- Upgraded fom node `12` to `20`
+- Upgraded from node `12` to `20`
 - Replaced deprecated `@zeit/ncc` @ for `@vercel/ncc`
 
 ## 1.1.0
